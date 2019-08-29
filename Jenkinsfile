@@ -23,7 +23,7 @@ node('master') {
 	stage("Install webapp") {
 					def ansibleimg = docker.image(TOMCAT_IMAGE)
 					ansibleimg.inside() { c->
-					    sh "curl localhost:8080/SampleWebApp/"
+					
 					}
 		}
     }
