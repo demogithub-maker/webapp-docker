@@ -21,10 +21,13 @@ node('master') {
 	}
 	
 	stage("Install webapp") {
-					def ansibleimg = docker.image(TOMCAT_IMAGE)
-					ansibleimg.run(TOMCAT_IMAGE) { c->
-					
-					}
+	       try {
+			docker.image('TOMCAT_IMAGE').withRun {c ->
+			  sh "curl localhost:8080/SampleWebApp"
 		}
-    }
-    
+		catch (Exception e) {
+			currentBuild.result = 'FAILURE'
+			notifyBitbucket()
+			throw e
+		}
+	}
