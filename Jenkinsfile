@@ -21,13 +21,11 @@ node('master') {
 	}
 	
 	stage("Install webapp") {
-	       try {
+		try {
 			docker.image('TOMCAT_IMAGE').withRun {c ->
 			  sh "curl localhost:8080/SampleWebApp"
+			}
 		}
-		catch (Exception e) {
-			currentBuild.result = 'FAILURE'
-			notifyBitbucket()
-			throw e
 		}
-	}
+    }
+    
