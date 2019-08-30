@@ -22,7 +22,7 @@ node('master') {
 	
 	stage("Install webapp") {
 		docker.image(tomcat).withRun('-p 8080:8080') {c ->
-		sh "curl -i http://localhost:8080/SampleWebApp"
+		sh "curl -i http://0.0.0.0:8080/SampleWebApp"
 							}
 				}
     }
