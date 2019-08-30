@@ -1,8 +1,8 @@
 #!/usr/bin/env groovy
 
-final String tomcat = "tomcat"																			
+final String TOMCAT_IMAGE = "webapp-using-tomcat"																			
 
-node('master') {
+node('any') {
 	
 	stage('Prepare') {
 		deleteDir()
@@ -11,7 +11,7 @@ node('master') {
 	
 	stage('Build Docker Image') {
 		try {
-			docker.build(tomcat)
+			docker.build(TOMCAT_IMAGE)
 		}
 		catch (Exception e) {
 			currentBuild.result = 'FAILURE'
@@ -21,12 +21,11 @@ node('master') {
 	}
 	
 	stage("Install webapp") {
-		def ansibleimg = docker.image(tomcat).withRun('-p 8080:8080') { c->
-			ansibleimg.inside()
-			    sh "curl -i http://localhost:8080/SampleWebApp"
-			      
-		 
-			  }
+		docker.image(TOMCAT_IMAGE).withRun('-p 8080:8080') {c ->
+			docker.image(TOMCAT_IMAGE).inside {
+				sh "curl localhost:8080/SampleWebApp/"
+						
+					}
 		}
-	}
-
+    }
+}
