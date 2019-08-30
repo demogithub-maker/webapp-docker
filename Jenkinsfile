@@ -2,7 +2,7 @@
 
 final String TOMCAT_IMAGE = "webapp-using-tomcat"																			
 
-node('any') {
+node('master') {
 	
 	stage('Prepare') {
 		deleteDir()
