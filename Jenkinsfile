@@ -2,7 +2,7 @@
 
 final String TOMCAT_IMAGE = "webapp-using-tomcat"																			
 
-node('master') {
+node('any') {
 	
 	stage('Prepare') {
 		deleteDir()
@@ -21,11 +21,12 @@ node('master') {
 	}
 	
 	stage("Install webapp") {
-		try {
-			docker.image('TOMCAT_IMAGE').withRun {c ->
-			  sh "curl localhost:8080/SampleWebApp"
-			}
-		}
+					def ansibleimg = docker.image(TOMCAT_IMAGE)
+					ansibleimg.withRun() { c->
+						sh "curl localhost:8080/SampleWebApp"
+						
+					}
 		}
     }
     
+	
