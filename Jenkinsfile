@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-final String tomcat = "webapp-using-tomcat"																			
+final String tomcat = "tomcat"																			
 
 node('master') {
 	
