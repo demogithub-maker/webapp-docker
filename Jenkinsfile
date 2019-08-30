@@ -21,12 +21,9 @@ node('master') {
 	}
 	
 	stage("Install webapp") {
-		  def ansibleimg = docker.image(tomcat)
+		  def ansibleimg = docker.image(tomcat).withRun('-p 8080:8080')
 		      ansibleimg.inside() { c->
-			  docker.image('tomcat').withRun('-p 8080:8080')
-			    sh "curl -i http://localhost:8080/SampleWebApp"
-			      
-		 
-			  }
+			      sh "curl -i http://localhost:8080/SampleWebApp"
+		      }
 		}
 }	
