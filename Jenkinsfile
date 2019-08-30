@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-final String TOMCAT_IMAGE = "webapp-using-tomcat"																			
+final String tomcat = "webapp-using-tomcat"																			
 
 node('master') {
 	
@@ -11,7 +11,7 @@ node('master') {
 	
 	stage('Build Docker Image') {
 		try {
-			docker.build(TOMCAT_IMAGE)
+			docker.build(tomcat)
 		}
 		catch (Exception e) {
 			currentBuild.result = 'FAILURE'
@@ -21,7 +21,7 @@ node('master') {
 	}
 	
 	stage("Install webapp") {
-		docker.image('TOMCAT_IMAGE').withRun('-p 8080:80') {c ->
+		docker.image(tomcat).withRun('-p 8080:80') {c ->
 		sh "curl -i http://localhost:8080/SampleWebApp"
 							}
 				}
