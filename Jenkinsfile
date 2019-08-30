@@ -22,7 +22,7 @@ node('master') {
 	
 	stage("Install webapp") {
 					def ansibleimg = docker.image(TOMCAT_IMAGE)
-					ansibleimg.inside() { c->
+					ansibleimg.run() { c->
 					
 					}
 		}
