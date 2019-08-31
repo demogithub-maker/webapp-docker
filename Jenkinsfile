@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-final String TOMCAT_IMAGE = "webapp-using-tomcat"																			
+final String TOMCAT_IMAGE = "tomcat"																			
 
 node('master') {
 	
