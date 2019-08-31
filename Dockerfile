@@ -9,3 +9,7 @@ RUN apk update && apk add curl && rm -rf /var/cache/apk/*
 EXPOSE 8080
 
 CMD ["catalina.sh", "run"]
+
+#run
+# run
+CMD curl -i http://localhost:8080/SampleWebApp
