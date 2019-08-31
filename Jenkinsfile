@@ -21,8 +21,8 @@ node('master') {
 	}
 	
 	stage("Install webapp") {
-		docker.image(TOMCAT_IMAGE).withRun('-p 8080:8080') {c ->
-			sh "curl -i http://0.0.0.0:8080/SampleWebApp"
+		docker.image(TOMCAT_IMAGE).withRun('-p 8080:8080') { c ->
+			sh "sleep 2 ; curl -i http://0.0.0.0:8080/SampleWebApp"
 				
 					}
     }
